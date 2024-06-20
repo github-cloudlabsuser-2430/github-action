@@ -10,7 +10,7 @@ on:
       - main
     # Only trigger when this specific workflow file is modified
     paths:
-      - '.github/workflows/<workflow-filename>.yml'  # Replace <workflow-filename> with the actual filename of your workflow
+      - '.github/workflows/hello-action.yml'  # Replace <workflow-filename> with the actual filename of your workflow
   # Trigger the workflow on pull request events
   pull_request:
     # Only trigger on pull requests to the main branch
@@ -18,7 +18,7 @@ on:
       - main
     # Only trigger when this specific workflow file is modified
     paths:
-      - '.github/workflows/<workflow-filename>.yml'  # Replace <workflow-filename> with the actual filename of your workflow
+      - '.github/workflows/hello-action.yml'  # Replace <workflow-filename> with the actual filename of your workflow
   # Allow manual triggering of the workflow
   workflow_dispatch:
 
