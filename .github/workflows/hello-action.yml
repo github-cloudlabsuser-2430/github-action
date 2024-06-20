@@ -2,15 +2,24 @@
 
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # Trigger the workflow on push events
   push:
-    branches: [ "main" ]
+    # Only trigger on pushes to the main branch
+    branches:
+      - main
+    # Only trigger when this specific workflow file is modified
+    paths:
+      - '.github/workflows/<workflow-filename>.yml'  # Replace <workflow-filename> with the actual filename of your workflow
+  # Trigger the workflow on pull request events
   pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    # Only trigger on pull requests to the main branch
+    branches:
+      - main
+    # Only trigger when this specific workflow file is modified
+    paths:
+      - '.github/workflows/<workflow-filename>.yml'  # Replace <workflow-filename> with the actual filename of your workflow
+  # Allow manual triggering of the workflow
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
