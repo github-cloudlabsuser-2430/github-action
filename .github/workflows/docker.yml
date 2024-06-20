@@ -1,0 +1,57 @@
+# Name of the workflow
+name: Build and Push Docker Image to ACR
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/docker.yml'  
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/docker.yml'  
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    # Specify the OS for the job
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step to check out the code from the repository
+      - name: Checkout repository
+        # Use the checkout action
+        uses: actions/checkout@v2
+
+      # Step to log in to Azure CLI
+      - name: Log in to Azure CLI
+        # Use the Azure login action
+        uses: azure/login@v1
+        with:
+          # Use Azure credentials stored in GitHub secrets
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Step to list files in the current directory
+      - name: List files
+        # Command to list files
+        run: ls -la
+
+      # Step to build the Docker image
+      - name: Build Docker image
+        run: |
+          # Build the Docker image and tag it
+          docker buildx build . -t gacontainer1381497.azurecr.io/my-app:latest
+
+      # Step to log in to Azure Container Registry
+      - name: Log in to Azure Container Registry
+        run: |
+          # Log in to Azure Container Registry
+          az acr login --name gacontainer1381497
+
+      # Step to push the Docker image to ACR
+      - name: Push Docker image
+        run: |
+          # Push the Docker image to ACR
+          docker push gacontainer1381497.azurecr.io/my-app:latest
