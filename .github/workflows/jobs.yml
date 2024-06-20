@@ -7,11 +7,19 @@ on:
     # Only trigger on pushes to the main branch
     branches:
       - main
+    # Only trigger when this specific workflow file is modified
+    paths:
+      - '.github/workflows/jobs.yml'  # Replace <workflow-filename> with the actual filename of your workflow
   # Trigger the workflow on pull request events
   pull_request:
     # Only trigger on pull requests to the main branch
     branches:
       - main
+    # Only trigger when this specific workflow file is modified
+    paths:
+      - '.github/workflows/jobs.yml'  # Replace <workflow-filename> with the actual filename of your workflow
+  # Allow manual triggering of the workflow
+  workflow_dispatch:
 
 jobs:
   job1:
