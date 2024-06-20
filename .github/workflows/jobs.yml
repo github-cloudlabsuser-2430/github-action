@@ -1,0 +1,45 @@
+# Name of the workflow
+name: My Workflow
+
+on:
+# Trigger the workflow on push events
+push:
+   # Only trigger on pushes to the main branch
+   branches:
+   - main
+# Trigger the workflow on pull request events
+pull_request:
+   # Only trigger on pull requests to the main branch
+   branches:
+   - main
+
+jobs:
+job1:
+   # Specify the OS for the job
+   runs-on: ubuntu-latest
+   steps:
+      # Step to check out the code from the repository
+      - name: Checkout code
+      # Use the checkout action from the marketplace
+      uses: actions/checkout@v2
+
+      # Step to run a script
+      - name: Run a script
+      # The script to run, which prints "Hello, world!"
+      run: echo "Hello, world!"
+
+job2:
+   # Specify the OS for the job
+   runs-on: ubuntu-latest
+   # This job depends on the successful completion of job1
+   needs: job1
+   steps:
+      # Step to check out the code from the repository
+      - name: Checkout code
+      # Use the checkout action from the marketplace
+      uses: actions/checkout@v2
+
+      # Step to run another script
+      - name: Run another script
+      # The script to run, which prints "Hello, again!"
+      run: echo "Hello, again!"
