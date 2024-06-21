@@ -3,35 +3,24 @@
 name: CI
 
 on:
-  # Trigger the workflow on push events
   push:
-    # Only trigger on pushes to the main branch
     branches:
       - main
-    # Only trigger when this specific workflow file is modified
     paths:
-      - '.github/workflows/hello-action.yml'  # Replace <workflow-filename> with the actual filename of your workflow
-  # Trigger the workflow on pull request events
+      - '.github/workflows/hello-action.yml'
   pull_request:
-    # Only trigger on pull requests to the main branch
     branches:
       - main
-    # Only trigger when this specific workflow file is modified
     paths:
-      - '.github/workflows/hello-action.yml'  # Replace <workflow-filename> with the actual filename of your workflow
-  # Allow manual triggering of the workflow
+      - '.github/workflows/hello-action.yml'
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
       # Runs a single command using the runners shell
