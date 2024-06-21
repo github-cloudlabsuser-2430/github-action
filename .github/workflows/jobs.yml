@@ -39,14 +39,12 @@ jobs:
         LOGIN_SERVER: ${{ vars.LOGIN_SERVER }}
       run: |
         docker buildx build . -t $LOGIN_SERVER/my-app:latest
-
     # Log in to Azure Container Registry
     - name: Log in to Azure Container Registry
       env:
         REGISTRY_NAME: ${{ vars.REGISTRY_NAME }}
       run: |
         az acr login --name $REGISTRY_NAME
-
     # Push Docker image to Azure Container Registry
     - name: Push Docker image
       env:
